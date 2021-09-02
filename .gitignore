@@ -1,0 +1,7 @@
+/jey_inventory_env
+project.db
+.vscode
+/media
+__pycache__
+tmp
+.idea
