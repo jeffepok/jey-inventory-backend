@@ -12,22 +12,24 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 import dj_database_url
+from dotenv import load_dotenv
 
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 DATA_DIR = os.path.dirname(os.path.dirname(__file__))
 
-PRODUCTION = False
+PRODUCTION = True
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-0sd%7v)*^c6uwgs49eb1id*49_-i_5s@%qpxx@m679li%p471('
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'jey-inventory.herokuapp.com']
 
@@ -84,7 +86,7 @@ WSGI_APPLICATION = 'jey_inventory.wsgi.application'
 
 if 'DATABASE_URL' in os.environ:
     DATABASES = {
-        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+        'default': dj_database_url.parse(os.getenv('DATABASE_URL'))
     }
 else:
     DATABASES = {

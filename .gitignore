@@ -5,3 +5,4 @@ project.db
 __pycache__
 tmp
 .idea
+.env
