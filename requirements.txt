@@ -22,6 +22,7 @@ MarkupSafe==2.0.1
 oauthlib==3.1.1
 Pillow==8.3.2
 ply==3.11
+psycopg2==2.9.1
 pycparser==2.20
 PyJWT==2.1.0
 python3-openid==3.2.0
