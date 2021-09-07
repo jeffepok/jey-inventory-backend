@@ -16,10 +16,13 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.urls import path
+from inventory import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^auth/', include('djoser.urls')),
-    url(r'^auth/', include('djoser.urls.authtoken')),
-    path('inventory/', include('inventory.urls'))
+    url(r'^api/auth/', include('rest_framework.urls')),
+    url(r'^api/auth/', include('djoser.urls')),
+    url(r'^api/auth/', include('djoser.urls.authtoken')),
+    url(r'^api/inventory/', include('inventory.urls')),
+    path('', views.api_root),
 ]
