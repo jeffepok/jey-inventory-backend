@@ -8,7 +8,7 @@ class IsOwnerOrAdmin(permissions.BasePermission):
     """
 
     def has_object_permission(self, request, view, obj):
-        #Read or write permissions are only allowed to admin
+        # Read or write permissions are only allowed to admin
         if request.user.is_superuser:
             return True
 

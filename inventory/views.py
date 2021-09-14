@@ -1,24 +1,22 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
-from rest_framework import renderers
-
-# Create your views here.
-
-from inventory.models import Item, Category
+from inventory.models import Item
 from inventory.serializers import ItemSerializer, CategorySerializer
 from rest_framework import generics, permissions
 from inventory.permissions import IsOwnerOrAdmin
+
 
 class ItemList(generics.ListCreateAPIView):
     serializer_class = ItemSerializer
     permission_classes = [permissions.IsAuthenticated, IsOwnerOrAdmin]
 
     def get_queryset(self):
-       return Item.objects.filter(owner = self.request.user)
+        return Item.objects.filter(owner=self.request.user)
 
     def perform_create(self, serializer):
-        serializer.save(owner = self.request.user)
+        serializer.save(owner=self.request.user)
+
 
 class ItemDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Item.objects.all()
@@ -34,8 +32,6 @@ class CategoryList(generics.ListCreateAPIView):
 class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Item.objects.all()
     serializer_class = CategorySerializer
-
-
 
 
 @api_view(['GET'])

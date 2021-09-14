@@ -1,6 +1,6 @@
 from django.contrib import admin
 from inventory.models import Item, Category
-# Register your models here.
+
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
@@ -9,6 +9,7 @@ class ItemAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         obj.owner = request.user
         obj.save()
+
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
