@@ -1,5 +1,5 @@
 /jey_inventory_env
-project.db
+db.sqlite3
 .vscode
 /media
 __pycache__
