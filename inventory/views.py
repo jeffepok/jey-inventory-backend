@@ -7,9 +7,6 @@ from inventory.models import Item
 from inventory.serializers import ItemSerializer, CategorySerializer
 from rest_framework import generics, permissions
 from inventory.permissions import IsOwnerOrAdmin
-from django.core.files.base import ContentFile
-import base64
-from rest_framework import status
 
 
 class ItemList(generics.ListCreateAPIView):

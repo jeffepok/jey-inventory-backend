@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 DATA_DIR = os.path.dirname(os.path.dirname(__file__))
 
-PRODUCTION = True
+PRODUCTION = False
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -84,10 +84,12 @@ WSGI_APPLICATION = 'jey_inventory.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if 'DATABASE_URL' in os.environ:
+if PRODUCTION and ('DATABASE_URL' in os.environ):
     DATABASES = {
         'default': dj_database_url.parse(os.getenv('DATABASE_URL'))
     }
+    db_from_env = dj_database_url.config(conn_max_age=500)
+    DATABASES['default'].update(db_from_env)
 else:
     DATABASES = {
         'default': {
@@ -95,9 +97,6 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
