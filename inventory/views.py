@@ -1,5 +1,3 @@
-import uuid
-
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
@@ -14,7 +12,7 @@ class ItemList(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticated, IsOwnerOrAdmin]
 
     def get_queryset(self):
-        return Item.objects.filter
+        return Item.objects.filter(owner=self.request.user)
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -37,8 +35,8 @@ class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 @api_view(['GET'])
-def api_root(request, format=None):
+def api_root(request, api_format=None):
     return Response({
-        'users': reverse('user-list', request=request, format=format),
-        'inventory': reverse('item-list', request=request, format=format)
+        'users': reverse('user-list', request=request, format=api_format),
+        'inventory': reverse('item-list', request=request, format=api_format)
     })
