@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 DATA_DIR = os.path.dirname(os.path.dirname(__file__))
 
-PRODUCTION = False
+PRODUCTION = True
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
